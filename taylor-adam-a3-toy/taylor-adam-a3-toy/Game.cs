@@ -14,12 +14,18 @@ namespace MohawkGame2D
         ///     Setup runs once before the game loop begins.
         /// </summary>
 
-        Fish fish = new Fish();
+        Fish[] fishs = new Fish[7];
         public void Setup()
         {
             Window.SetSize(800, 600);
             Window.SetTitle("Fishing Toy");
-            fish.Setup();
+            for (int i = 0; i < fishs.Length; i++)
+            {
+
+
+                fishs[i] = new Fish();
+                fishs[i].Setup();
+            }
         }
 
         /// <summary>
@@ -30,8 +36,11 @@ namespace MohawkGame2D
             Window.ClearBackground(255);
             Background();
 
-            fish.FishSwim();
-            
+            for (int i = 0; i < fishs.Length; i++)
+            {
+                fishs[i].FishSwim();
+            }
+
         }
 
 

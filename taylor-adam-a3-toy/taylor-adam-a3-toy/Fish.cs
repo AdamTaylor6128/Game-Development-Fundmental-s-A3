@@ -18,8 +18,8 @@ namespace MohawkGame2D
         public void Setup()
         {
             posX = Random.Integer(150, 750);
-            posY = Random.Integer(350, 550);
-            speed = Random.Integer(50, 70);
+            posY = Random.Integer(250, 550);
+            speed = Random.Integer(50, 150);
             rad = Random.Color();
         }
 
