@@ -28,8 +28,17 @@ namespace MohawkGame2D
         public void Update()
         {
             Window.ClearBackground(255);
+            Background();
+
             fish.FishSwim();
             
+        }
+
+
+        private void Background()
+        {
+
+
         }
     }
 

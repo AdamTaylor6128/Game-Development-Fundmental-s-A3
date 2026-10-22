@@ -7,11 +7,11 @@ namespace MohawkGame2D
     public class Fish
     {
 
-        int posX;
-        int posY;
-        //Color(int r, int g, int b);
+        float posX;
+        float posY;
+        Color rad;
         bool leftM = false;
-        int speed;
+        float speed;
 
         
 
@@ -19,15 +19,16 @@ namespace MohawkGame2D
         {
             posX = Random.Integer(150, 750);
             posY = Random.Integer(350, 550);
-            speed = Random.Integer(2, 7);
+            speed = Random.Integer(50, 70);
+            rad = Random.Color();
         }
 
         public void FishSwim()
         {
             if (leftM == true)
             {
-               
-                posX -= speed * Time.FramesElapsed;
+
+                posX -= speed * Time.DeltaTime;
 
                 FishLeft();
 
@@ -40,7 +41,7 @@ namespace MohawkGame2D
             {
 
                
-                posX += speed * Time.FramesElapsed;
+                posX += speed * Time.DeltaTime;
 
                 FishRight();
                 
@@ -54,14 +55,13 @@ namespace MohawkGame2D
 
         public void FishCaught()
         {
-
-
+            FishUp();
         }
 
         private void FishLeft()
         {
             Draw.SetLineSize(0);
-            Draw.SetFillColor(Color.Green);
+            Draw.SetFillColor(rad);
             Draw.Arc(posX, posY, 70, 70, 140, -150);
             Draw.Triangle(posX, posY+35, posX, posY-35, posX+100, posY);
             Draw.Triangle(posX+110, posY + 20, posX+110, posY - 30, posX + 70, posY);
@@ -71,11 +71,20 @@ namespace MohawkGame2D
         private void FishRight()
         {
             Draw.SetLineSize(0);
-            Draw.SetFillColor(Color.Green);
+            Draw.SetFillColor(rad);
             Draw.Arc(posX, posY, 70, 70, 20, 320);
             Draw.Triangle(posX, posY + 35, posX, posY - 35, posX - 100, posY);
             Draw.Triangle(posX - 110, posY + 20, posX - 110, posY - 30, posX - 70, posY);
 
+        }
+
+        private void FishUp ()
+        {
+            Draw.SetLineSize(0);
+            Draw.SetFillColor(rad);
+            Draw.Arc(posX, posY, 70, 70, 220, -30);
+            Draw.Triangle(posX+40, posY , posX-45, posY, posX , posY+100);
+            Draw.Triangle(posX + 20, posY + 110, posX - 30, posY+ 110 , posX, posY+ 70);
         }
 
     }
