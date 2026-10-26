@@ -38,7 +38,7 @@ namespace MohawkGame2D
 
             for (int i = 0; i < fishs.Length; i++)
             {
-                fishs[i].FishSwim();
+                fishs[i].FishActive();
             }
 
         }

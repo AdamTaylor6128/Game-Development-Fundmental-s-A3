@@ -17,12 +17,37 @@ namespace MohawkGame2D
 
         public void Setup()
         {
-            posX = Random.Integer(150, 750);
-            posY = Random.Integer(250, 550);
+            posX = Random.Integer(50, Window.Width-50);
+            posY = Random.Integer(50, Window.Height-50);
             speed = Random.Integer(50, 150);
             rad = Random.Color();
         }
 
+        public void FishActive()
+        {
+            if(Input.IsMouseButtonDown(MouseButton.Left) && Input.GetMouseX() <= (posX+35) && Input.GetMouseX() >= (posX -110) && Input.GetMouseY() <= (posY+35) && Input.GetMouseY() >= (posY-35) && leftM == false)
+            {
+                FishUp();
+                posX = Input.GetMouseX();
+                posY = Input.GetMouseY();
+
+
+            }
+            else if(Input.IsMouseButtonDown(MouseButton.Left) && Input.GetMouseX() <= (posX + 110) && Input.GetMouseX() >= (posX - 35) && Input.GetMouseY() <= (posY + 35) && Input.GetMouseY() >= (posY - 35) && leftM == true)
+            {
+                FishUp();
+                posX = Input.GetMouseX();
+                posY = Input.GetMouseY();
+
+            }
+            else
+            {
+                FishSwim();
+
+            }
+
+        }
+        
         public void FishSwim()
         {
             if (leftM == true)
@@ -32,7 +57,7 @@ namespace MohawkGame2D
 
                 FishLeft();
 
-                if (posX <= 150)
+                if (posX <=  50)
                 {
                     leftM = false;
                 }
@@ -45,7 +70,7 @@ namespace MohawkGame2D
 
                 FishRight();
                 
-                if (posX >= 750)
+                if (posX >= Window.Width - 50)
                 {
                     leftM = true;
                 }
@@ -53,10 +78,7 @@ namespace MohawkGame2D
             }
         }
 
-        public void FishCaught()
-        {
-            FishUp();
-        }
+        
 
         private void FishLeft()
         {
@@ -83,7 +105,7 @@ namespace MohawkGame2D
             Draw.SetLineSize(0);
             Draw.SetFillColor(rad);
             Draw.Arc(posX, posY, 70, 70, 220, -30);
-            Draw.Triangle(posX+40, posY , posX-45, posY, posX , posY+100);
+            Draw.Triangle(posX+35, posY , posX-35, posY, posX , posY+100);
             Draw.Triangle(posX + 20, posY + 110, posX - 30, posY+ 110 , posX, posY+ 70);
         }
 
