@@ -33,8 +33,8 @@ namespace MohawkGame2D
         /// </summary>
         public void Update()
         {
-            Window.ClearBackground(255);
-            Background();
+            Window.ClearBackground(48, 118, 199);
+           
 
             for (int i = 0; i < fishs.Length; i++)
             {
@@ -44,11 +44,7 @@ namespace MohawkGame2D
         }
 
 
-        private void Background()
-        {
-
-
-        }
+       
     }
 
 }
