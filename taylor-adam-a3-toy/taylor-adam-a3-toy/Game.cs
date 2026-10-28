@@ -15,6 +15,7 @@ namespace MohawkGame2D
         /// </summary>
 
         Fish[] fishs = new Fish[7];
+        AdditionalEffect add = new AdditionalEffect();
         public void Setup()
         {
             Window.SetSize(800, 600);
@@ -34,7 +35,7 @@ namespace MohawkGame2D
         public void Update()
         {
             Window.ClearBackground(48, 118, 199);
-           
+            add.Wave();
 
             for (int i = 0; i < fishs.Length; i++)
             {

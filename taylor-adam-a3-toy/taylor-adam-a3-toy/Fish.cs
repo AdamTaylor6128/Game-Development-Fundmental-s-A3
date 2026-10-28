@@ -12,29 +12,32 @@ namespace MohawkGame2D
         Color rad;
         bool leftM = false;
         float speed;
-
+        AdditionalEffect add = new AdditionalEffect();
         
-
+        //Randomize fish atrributes
         public void Setup()
         {
             posX = Random.Integer(50, Window.Width-50);
             posY = Random.Integer(50, Window.Height-50);
             speed = Random.Integer(50, 150);
             rad = Random.Color();
+            
         }
-
+        //Checks for fish collision and changes it if caught
         public void FishActive()
         {
             if(Input.IsMouseButtonDown(MouseButton.Left) && Input.GetMouseX() <= (posX+35) && Input.GetMouseX() >= (posX -110) && Input.GetMouseY() <= (posY+35) && Input.GetMouseY() >= (posY-35) && leftM == false)
             {
+                add.Ripple(posX, posY);
                 FishUp();
                 posX = Input.GetMouseX();
                 posY = Input.GetMouseY();
-
+              
 
             }
             else if(Input.IsMouseButtonDown(MouseButton.Left) && Input.GetMouseX() <= (posX + 110) && Input.GetMouseX() >= (posX - 35) && Input.GetMouseY() <= (posY + 35) && Input.GetMouseY() >= (posY - 35) && leftM == true)
             {
+                add.Ripple(posX, posY);
                 FishUp();
                 posX = Input.GetMouseX();
                 posY = Input.GetMouseY();
@@ -47,7 +50,7 @@ namespace MohawkGame2D
             }
 
         }
-        
+        //Controls the fish movments and checks if it has reached the border
         public void FishSwim()
         {
             if (leftM == true)
@@ -79,7 +82,7 @@ namespace MohawkGame2D
         }
 
         
-
+        //Draws the Fish looking Left
         private void FishLeft()
         {
             Draw.SetLineSize(0);
@@ -89,7 +92,7 @@ namespace MohawkGame2D
             Draw.Triangle(posX+110, posY + 20, posX+110, posY - 30, posX + 70, posY);
 
         }
-
+        //Draws the Fish Looking to the right
         private void FishRight()
         {
             Draw.SetLineSize(0);
@@ -99,7 +102,7 @@ namespace MohawkGame2D
             Draw.Triangle(posX - 110, posY + 20, posX - 110, posY - 30, posX - 70, posY);
 
         }
-
+        //Draws the Fish looking up
         private void FishUp ()
         {
             Draw.SetLineSize(0);

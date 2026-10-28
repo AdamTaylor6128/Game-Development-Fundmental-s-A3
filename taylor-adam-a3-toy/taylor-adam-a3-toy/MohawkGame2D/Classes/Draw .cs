@@ -7,6 +7,7 @@
 
 using Raylib_cs;
 using System;
+using System.Linq.Expressions;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
@@ -63,7 +64,43 @@ namespace MohawkGame2D
         /// <param name="angleTo">Ending arc angle fill, in degrees 0-360.</param>
         [OverloadResolutionPriority(FloatPriority)]
         public static void Arc(float x, float y, float w, float h, float angleFrom, float angleTo)
-            => Arc(new(x, y), new(w, h), angleFrom, angleTo, FillColor, LineSize, LineColor);
+            => Arc(new(x, y), new(w, h), angleFrom, angleTo, FillColor, LineSize, LineColor, true);
+
+        /// <summary>
+        ///     Draw a filled and outlined arc at position (<paramref name="x"/>, 
+        ///     <paramref name="y"/>) expanding outward to size (<paramref name="w"/>, 
+        ///     <paramref name="h"/>) from <paramref name="angleFrom"/> to
+        ///     <paramref name="angleTo"/> using <see cref="Draw.LineSize"/> for
+        ///     the outline thickness, <see cref="Draw.LineColor"/> for the line's color, and
+        ///     <see cref="Draw.FillColor"/> for the rectangle's fill Color.
+        /// </summary>
+        /// <param name="x">The arc's X position, defines the horizontal centre.</param>
+        /// <param name="y">The arc's Y position, defines the vertical centre.</param>
+        /// <param name="w">The arc's width.</param>
+        /// <param name="h">The arc's height.</param>
+        /// <param name="angleFrom">Starting arc angle fill, in degrees 0-360.</param>
+        /// <param name="angleTo">Ending arc angle fill, in degrees 0-360.</param>
+        /// <param name="doInnerLines">Whether or not to draw inner lines inside arc.</param>
+        [OverloadResolutionPriority(FloatPriority)]
+        public static void Arc(float x, float y, float w, float h, float angleFrom, float angleTo, bool doInnerLines)
+            => Arc(new(x, y), new(w, h), angleFrom, angleTo, FillColor, LineSize, LineColor, doInnerLines);
+
+        /// <summary>
+        ///     Draw a filled and outlined arc at <paramref name="position"/>
+        ///     expanding outward to <paramref name="size"/> from 
+        ///     <paramref name="angleFrom"/> to <paramref name="angleTo"/> using 
+        ///     <see cref="Draw.LineSize"/> for the outline thickness, 
+        ///     <see cref="Draw.LineColor"/> for the line's color, and
+        ///     <see cref="Draw.FillColor"/> for the rectangle's fill Color.
+        /// </summary>
+        /// <param name="position">The arc's position, defines the centre point.</param>
+        /// <param name="size">The arc's size (width and height).</param>
+        /// <param name="angleFrom">Starting arc angle fill, in degrees 0-360.</param>
+        /// <param name="angleTo">Ending arc angle fill, in degrees 0-360.</param>
+        /// <param name="doInnerLines">Whether or not to draw inner lines inside arc.</param>
+        [OverloadResolutionPriority(FloatPriority)]
+        public static void Arc(Vector2 position, Vector2 size, float angleFrom, float angleTo, bool doInnerLines)
+            => Arc(position, size, angleFrom, angleTo, FillColor, LineSize, LineColor, doInnerLines);
 
         /// <summary>
         ///     Draw a filled and outlined arc at <paramref name="position"/>
@@ -79,7 +116,7 @@ namespace MohawkGame2D
         /// <param name="angleTo">Ending arc angle fill, in degrees 0-360.</param>
         [OverloadResolutionPriority(FloatPriority)]
         public static void Arc(Vector2 position, Vector2 size, float angleFrom, float angleTo)
-            => Arc(position, size, angleFrom, angleTo, FillColor, LineSize, LineColor);
+            => Arc(position, size, angleFrom, angleTo, FillColor, LineSize, LineColor, true);
 
         /// <summary>
         ///     Draw a filled and outlined capsule with endpoints at (<paramref name="x1"/>, <paramref name="y1"/>)
@@ -539,7 +576,7 @@ namespace MohawkGame2D
 
         #region Private Methods
 
-        private static void Arc(Vector2 position, Vector2 size, float angleFrom, float angleTo, Color fillColor, float lineSize, Color lineColor)
+        private static void Arc(Vector2 position, Vector2 size, float angleFrom, float angleTo, Color fillColor, float lineSize, Color lineColor, bool doInnerLines)
         {
             // Correct scale
             size /= 2;
@@ -580,7 +617,10 @@ namespace MohawkGame2D
             // FILL
             Raylib.DrawTriangleFan(points, points.Length, fillColor);
             // OUTLINE
-            PolyLine(points, lineSize, lineColor);
+            if (doInnerLines)
+                PolyLine(points, lineSize, lineColor);
+            else
+                PolyLine(points[1..^1], lineSize, lineColor);
         }
 
         private static float ApproximateEllipseCircumference(float a, float b)
