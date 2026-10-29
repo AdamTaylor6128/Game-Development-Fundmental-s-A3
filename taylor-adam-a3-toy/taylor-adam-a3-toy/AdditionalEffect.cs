@@ -30,9 +30,6 @@ namespace MohawkGame2D
         {
             
 
-
-
-
             //Wave Drawings
             if (opacityW <= 0)
             {
@@ -40,8 +37,8 @@ namespace MohawkGame2D
                 opacityW = 255;
                 for (int i = 0; i < 100; i++)
                 {
-                    WaveX[i] = Random.Integer(0, Window.Width);
-                    WaveY[i] = Random.Integer(0, Window.Height);
+                    WaveX[i] = Random.Integer(0, 800);
+                    WaveY[i] = Random.Integer(0, 600);
 
                 }
 
@@ -77,7 +74,7 @@ namespace MohawkGame2D
             Draw.SetLineSize(10);
             Draw.SetFillColor(48, 118, 199, opacityW);
             Draw.SetLineColor(66 + colRed, 155 + colGreen, 245, opacityW);
-            Draw.Arc(200 + wavePosX, 200 + wavePosY, 100, 66, 180, 360, false);
+            Draw.Arc(wavePosX, wavePosY, 100, 66, 180, 360, false);
 
         }
 
