@@ -7,7 +7,7 @@ namespace MohawkGame2D
     internal class AdditionalEffect
     {
        
-        int opacityW = 255;
+        int opacityW = 0;
         int opacityR = 255;
         
         int colRed;
@@ -51,18 +51,7 @@ namespace MohawkGame2D
                 colRed = Random.Integer(-20, 100);
 
             }
-            else if (first ==true)
-            {
-
-                for (int i = 0; i < 100; i++)
-                {
-                    WaveX[i] = Random.Integer(0, Window.Width);
-                    WaveY[i] = Random.Integer(0, Window.Height);
-
-                }
-
-                first = false;
-            }
+            
 
             else if (opacityW > 0)
             {
@@ -72,7 +61,7 @@ namespace MohawkGame2D
 
                     //Draws the waves
                     WaveDrawing(WaveX[i], WaveY[i]);
-
+                    
                 }
 
                 opacityW -= 2;
