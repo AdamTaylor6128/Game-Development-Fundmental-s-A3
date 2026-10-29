@@ -13,7 +13,7 @@ namespace MohawkGame2D
         int colRed;
         int colGreen;
         float rad = 0;
-        bool first = true;
+        
 
 
 
@@ -22,13 +22,13 @@ namespace MohawkGame2D
         /// </summary>
 
 
-
+         int[] WaveX = new int[100];
+         int[] WaveY = new int[100];
 
 
         public void Wave()
         {
-            int[] WaveX = new int[100];
-            int[] WaveY = new int[100];
+            
 
 
 
